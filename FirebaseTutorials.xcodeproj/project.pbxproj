@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D4F0DE862DBC03F80013F0A9 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D4F0DE852DBC03F80013F0A9 /* FirebaseAnalytics */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		D4F0DE742DBBF54F0013F0A9 /* FirebaseTutorials.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirebaseTutorials.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4F0DE862DBC03F80013F0A9 /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = FirebaseTutorials;
 			packageProductDependencies = (
+				D4F0DE852DBC03F80013F0A9 /* FirebaseAnalytics */,
 			);
 			productName = FirebaseTutorials;
 			productReference = D4F0DE742DBBF54F0013F0A9 /* FirebaseTutorials.app */;
@@ -94,6 +100,9 @@
 			);
 			mainGroup = D4F0DE6B2DBBF54F0013F0A9;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				D4F0DE842DBC03F80013F0A9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D4F0DE752DBBF54F0013F0A9 /* Products */;
 			projectDirPath = "";
@@ -324,6 +333,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D4F0DE842DBC03F80013F0A9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.12.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D4F0DE852DBC03F80013F0A9 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D4F0DE842DBC03F80013F0A9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D4F0DE6C2DBBF54F0013F0A9 /* Project object */;
 }
