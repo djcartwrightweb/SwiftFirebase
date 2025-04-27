@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Firebase
+import FirebaseCore
 
 class AppDelegate: NSObject, UIApplicationDelegate {
   func application(_ application: UIApplication,
@@ -24,7 +25,7 @@ struct FirebaseTutorialsApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
         }
     }
 }
