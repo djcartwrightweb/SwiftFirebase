@@ -32,10 +32,38 @@ final class AuthenticationManager {
         return AuthDataResultModel(user: user)
     }
     
+    @discardableResult
     func createUser(email: String, password: String) async throws -> AuthDataResultModel {
         
         let authDataResult = try await Auth.auth().createUser(withEmail: email, password: password)
         return AuthDataResultModel(user: authDataResult.user)
+    }
+    
+    @discardableResult
+    func signInUser(email: String, password: String) async throws -> AuthDataResultModel {
+        let authDataResult = try await Auth.auth().signIn(withEmail: email, password: password)
+        return AuthDataResultModel(user: authDataResult.user)
+    }
+    
+    
+    func updatePassword(newPassword: String) async throws {
+        guard let user = Auth.auth().currentUser else {
+            throw URLError(.badServerResponse)
+        }
+        
+        try await user.updatePassword(to: newPassword)
+    }
+    
+    func resetPassword(email: String) async throws {
+        try await Auth.auth().sendPasswordReset(withEmail: email)
+    }
+    
+    func updateEmail(withEmail email: String) async throws {
+        guard let user = Auth.auth().currentUser else {
+            throw URLError(.badServerResponse)
+        }
+        
+        try await user.sendEmailVerification(beforeUpdatingEmail: email)
     }
     
     func signOut() throws {

@@ -12,19 +12,23 @@ import SwiftUI
     var email: String = ""
     var password: String = ""
     
-    func signIn() {
+    func signUp() async throws {
         guard !email.isEmpty, !password.isEmpty else {
             print("Email and password cannot be empty")
             return
         }
         
-        Task {
-            let returnedUserData = try await AuthenticationManager.shared.createUser(email: email, password: password)
-            print("success")
-            print(returnedUserData)
-        }
+        try await AuthenticationManager.shared.createUser(email: email, password: password) //returns a user object
     }
     
+    func signIn() async throws {
+        guard !email.isEmpty, !password.isEmpty else {
+            print("Email and password cannot be empty")
+            return
+        }
+        
+        try await AuthenticationManager.shared.signInUser(email: email, password: password) //returns a user object
+    }
     
     
 }
@@ -32,6 +36,7 @@ import SwiftUI
 struct SignInEmailView: View {
     
     @State var viewModel = SignInEmailViewModel()
+    @Binding var showSignInView: Bool
     
     var body: some View {
         VStack {
@@ -46,7 +51,24 @@ struct SignInEmailView: View {
                 .cornerRadius(10)
             
             Button {
-                viewModel.signIn()
+                Task {
+                    
+                    do {
+                        try await viewModel.signUp()
+                        showSignInView = false
+                        return
+                    } catch {
+                        print("Error signing in: \(error)")
+                    }
+                    
+                    do {
+                        try await viewModel.signIn()
+                        showSignInView = false
+                        return
+                    } catch {
+                        print("Error signing in: \(error)")
+                    }
+                }
             } label: {
                 Text("Sign In")
                     .font(.headline)
@@ -56,6 +78,7 @@ struct SignInEmailView: View {
                     .background(Color.blue)
                     .cornerRadius(8)
                     .padding()
+                    
             }
 
             Spacer()
@@ -68,7 +91,7 @@ struct SignInEmailView: View {
 
 #Preview {
     NavigationStack {
-        SignInEmailView()
+        SignInEmailView(showSignInView: .constant(true))
     }
         
 }
